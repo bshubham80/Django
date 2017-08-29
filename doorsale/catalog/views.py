@@ -46,6 +46,7 @@ class CatalogBaseView(BaseView):
         # Getting user selected currency from session, if not defined than
         # selecting default currency
         default_currency = self.request.session.get('default_currency', self.primary_currency.code)
+	secondary_currency = Currency.objects.get(code="GBP")
 
         # If user currency is not active than choosing primary currency
         default_currency = next(
@@ -57,6 +58,7 @@ class CatalogBaseView(BaseView):
         context['currencies'] = self.currencies
         context['primary_currency'] = self.primary_currency
         context['default_currency'] = default_currency
+	context['secondary_currency'] = secondary_currency
         context['catalog_template_name'] = self.catalog_template_name
 
         return context
